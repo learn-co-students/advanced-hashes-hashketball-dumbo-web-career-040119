@@ -234,10 +234,17 @@ def player_numbers(string)
 end
 
 def team_names
-abt = []
-game_hash.each do |i,v|
-abt << game_hash[i][:name]
-end
-abt
+  abt = []
+      game_hash.each do |i,v|
+      abt << i
+  end
 
+  act = []
+  i = 0
+    while i < game_hash.keys.length
+      act << game_hash[abt[i]][:name]
+    i+=1
+  end
+
+  act
 end
