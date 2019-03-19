@@ -201,3 +201,43 @@ players.max_by{|player, stats| stats.fetch(:shoe)}[1].fetch(:rebounds)
 
 
 end
+
+def most_points_scored
+
+players = game_hash[:home][:players].merge(game_hash[:away][:players])
+
+players.max_by{|player, stats| stats.fetch(:points)}[0]
+
+end
+
+def winning_team
+
+home_team = game_hash[:home][:players]
+home_score = 0
+home_team.collect {|player, stats| home_score += stats.fetch(:points)}
+p home_score
+
+
+away_team = game_hash[:away][:players]
+away_score = 0
+away_team.collect {|player, stats| away_score += stats.fetch(:points)}
+p  away_score
+
+if home_score > away_score
+  p game_hash[:home][:team_name]
+elsif home_score < away_score
+  p game_hash[:away][:team_name]
+else
+  p "Tied"
+end
+
+end
+
+def player_with_longest_name
+
+players = game_hash[:home][:players].merge(game_hash[:away][:players])
+
+players.max_by(1){|player, stats| player.length}[0][0]
+
+
+end
