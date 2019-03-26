@@ -227,8 +227,20 @@ def most_points_scored
   players.max_by{|player, stats| stats.fetch(:points)}[0]
 end
 
+# def winning_team
+# ("Brooklyn Nets")
+# end
+
+def player_points(team_name)
+ tfind(team_name)[:players].map{ |player, stats| stats[:points] }
+end
+
 def winning_team
-("Brooklyn Nets")
+ if player_points("Brooklyn Nets").reduce(:+) > player_points("Charlotte Hornets").reduce(:+)
+  "Brooklyn Nets"
+ else
+  "Charlotte Hornets"
+ end
 end
 
 def player_with_longest_name
