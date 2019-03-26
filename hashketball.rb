@@ -227,9 +227,9 @@ def most_points_scored
   players.max_by{|player, stats| stats.fetch(:points)}[0]
 end
 
-def winning_team
-("Brooklyn Nets")
-end
+# def winning_team
+# ("Brooklyn Nets")
+# end
 
 def win
  if player_points("Brooklyn Nets").reduce(:+) > player_points("Charlotte Hornets").reduce(:+)
