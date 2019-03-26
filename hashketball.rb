@@ -231,6 +231,14 @@ def winning_team
 ("Brooklyn Nets")
 end
 
+def win
+ if player_points("Brooklyn Nets").reduce(:+) > player_points("Charlotte Hornets").reduce(:+)
+  "Brooklyn Nets"
+ else
+  "Charlotte Hornets"
+ end
+end
+
 def player_with_longest_name
   players.max_by{|player, stats| player.length}[0]
 end
