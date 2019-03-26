@@ -231,6 +231,10 @@ end
 # ("Brooklyn Nets")
 # end
 
+def player_points(team_name)
+ tfind(team_name)[:players].map{ |player, stats| stats[:points] }
+end
+
 def win
  if player_points("Brooklyn Nets").reduce(:+) > player_points("Charlotte Hornets").reduce(:+)
   "Brooklyn Nets"
