@@ -118,51 +118,51 @@ def game_hash
 end
 
 def num_points_scored(player_name)
-  game_hash.each do |location, team_data|
-    if team_data[:players][player_name]
-       return team_data[:players][player_name][:points]#key -> player value -> stats
+  new_game = game_hash.collect do |location, team_data|# presents game_hash -> starts @ :home (i.e. team_data)
+    if team_data[:players][player_name]#if team_data value is :players -> chain p_n
+       return team_data[:players][player_name][:points]#then rt (thus halt) just-> t-d(is a hash)>[appro_arg][(s)] -> returns value!
     end
   end
 end
 
 def shoe_size(player_name)
-  game_hash.each do |location, team_data|
-    if team_data[:players][player_name]
-       return team_data[:players][player_name][:shoe]#key -> player value -> stats
+  game_hash.each do |location, team_data|# same as above ^^
+    if team_data[:players][player_name]# " " ^^
+       return team_data[:players][player_name][:shoe]# " " ^^
     end
   end
 end
 
 def team_colors(team)
   game_hash.each do |location, team_data|
-    if team == team_data[:team_name]
-      return team_data[:colors]
+    if team == team_data[:team_name]# if value arg presented(team) is eq to value of what's desired
+      return team_data[:colors] #then only return specified values
     end
   end
 end
 
 def team_names
-  game_hash.map do |location, team_data|
-     team_data[:team_name]
+  game_hash.collect do |location, team_data|
+     team_data[:team_name]#i.e. give me team_name(s) from either home, or away hash. no return or else stops short
   end
 end
 
 def player_numbers(team)
   team_numbers = []
   game_hash.each do |location, team_data|
-    if team == team_data[:team_name]
-      team_data[:players].each do |name, stats|
-        team_numbers << stats[:number]
+    if team == team_data[:team_name]#if presented arg value is eq to t_d[:t_n] val
+      team_data[:players].collect do |name, stats|#then dig into t_d[:players]
+        team_numbers << stats[:number]#and place those values in new empty array
       end
     end
   end
-  team_numbers
+  team_numbers #then show new array w/ desired values w/in!
 end
 
 def player_stats(player_name)
   game_hash.each do |location, team_data|
-    if team_data[:players][player_name]
-       return team_data[:players][player_name]#key -> player value -> stats
+    if team_data[:players][player_name] #if value arg presented(team) is eq to value of what's desired
+       return team_data[:players][player_name] #then only return specified values
     end
   end
 end
@@ -171,13 +171,23 @@ def big_shoe_rebounds
   biggest_shoe_size = 0
   rebounds = 0
 
-  game_hash.each do |location, team_data|
+  game_hash.collect do |location, team_data| 
     team_data[:players].each do |name, stats|
-      if stats[:shoe] > biggest_shoe_size
         biggest_shoe_size = stats[:shoe]
         rebounds = stats[:rebounds]
-      end
     end
   end
   rebounds
 end
+
+def find_by_number(num)
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |name, stats|
+      if num == stats[:number]
+        p name
+      end
+    end
+  end
+end
+
+find_by_number(33)
