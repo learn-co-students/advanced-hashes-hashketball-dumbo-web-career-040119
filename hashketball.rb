@@ -149,11 +149,9 @@ def team_colors(team_name)
 end
 
 def team_names
-  new_array = []
-  game_hash.each do |team, data|
-    new_array << data[:team_name]
+  game_hash.collect do |team, data|
+    data[:team_name]
   end
-  new_array
 end
 
 def player_numbers(team_name)
