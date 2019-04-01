@@ -136,6 +136,17 @@ def num_points_scored(name)
   player.fetch(:points)
 end
 
+def num_points_scored(player_name)
+all_players = game_hash[:away][:players].concat(game_hash[:home][:players])
+
+all_players = game_hash[:away][:players] + game_hash[:home][:players]
+
+found_player = game_hash[:away][:players].find do |player_hash|
+  player_name == player_hash[:player_name]
+end
+  found_player[:points]
+end
+
 def shoe_size(name)
    player = pfind(name)
   player.fetch(:shoe)
@@ -254,3 +265,13 @@ end
 def long_name_steals_a_ton?
   player_with_longest_name == player_most_steals
 end
+
+def new_rebounds
+  players = game_hash[:home][:players]
+  players.map {|player, stat| stat.fetch(:rebounds) += 1}
+end
+
+def new_rebounds
+  players = game_hash[:home][:players]
+  players.map { |player, stats| stats[:rebounds] += 1 }
+end 
